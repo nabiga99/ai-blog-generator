@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <title>Sign up</title>
+</head>
+<body class="flex flex-col bg-gray-100 font-sans antialised">
+        <!-- Navbar -->
+        <nav class="bg-blue-600 p-4 text-white flex justify-between">
+            <div>
+                <h1 class="text-3xl font-bold">AI Blog Generator</h1>
+            </div>
+            <div>
+                {% if request.user.is_authenticated %}
+                <a href="#" class="text-white hover:underline">Welcome {{user.username}}</a>
+                <a href="{% url 'aiblog:blog-list' %}" class="text-white hover:underline">Saved Blog Posts</a>
+                <a href="{% url 'aiblog:logout' %}" class="text-white hover:underline">Logout</a>
+                {% else %}
+                <a href="{% url 'aiblog:signup' %}" class="text-white hover:underline">Signup</a>
+                <a href="{% url 'aiblog:login' %}" class="text-white hover:underline">Login</a>
+                {% endif %}
+            </div>
+        </nav>
+        <!-- Main Content -->
+        <br>
+        <div class="flex items-center justify-center h-screen">
+            <div class="bg-white p-8 shadow-md rounded-lg max-w-md w-ful">
+                <form class="space-y-4" action="" method="POST">
+                    {% csrf_token %}
+                    {% if error_message %}
+                    <div align="center" style="color:red;">
+                        {{error_message}}
+                    </div>
+                    {% endif %}
+                    <h2 class="text-xl font-semibold">Sign up</h2>
+                    <div>
+                        <label class="block md-1 font-medium" for="username">Username</label>
+                        <input type="text" name="username" id="username" placeholder="Enter your username.." class="w-ful p-2 border rounded">
+                    </div>
+                    <div>
+                        <label class="block md-1 font-medium" for="email">Email</label>
+                        <input type="email" name="email" id="email" placeholder="Enter your email.." class="w-ful p-2 border rounded">
+                    </div>
+                    <div>
+                        <label class="block md-1 font-medium" for="password">Password</label>
+                        <input type="password" name="password" id="password" placeholder="Enter your password..." class="w-ful p-2 border rounded">
+                    </div>
+                    <div>
+                        <label class="block md-1 font-medium" for="repeatpassword">Repeat Password</label>
+                        <input type="password" name="repeatPassword" id="repeatPassword" placeholder="Repeat your password..." class="w-ful p-2 border rounded">
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700">Sign up</button>
+                </form>
+            </div>
+        </div>
+        <footer class="text-center p-4 text-black mt-6">
+            Powered by <a href="#">NabsTech</a>
+        </footer>
+    
+    
+        <script>
+    
+        </script>
+</body>
+</html>
